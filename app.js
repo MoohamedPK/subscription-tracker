@@ -6,6 +6,7 @@ import subRouter from "./routes/subscription.route.js"
 import connectDb from "./database/db.js"
 import errorMiddleware from "./middlewares/errorMiddleware.js"
 import cookieParser from "cookie-parser";
+import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
 
 
 const app = express();
@@ -17,6 +18,9 @@ app.use(express.urlencoded({extended: false }))
 
 // this one is allow you to store user data
 app.use(cookieParser())
+
+//ARCJET middleware 
+app.use(arcjetMiddleware)
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);

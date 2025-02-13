@@ -1,19 +1,25 @@
 import {Router} from "express";
+import {createSubscription, getUserSubscription, getAllSubscriptions, getSpecificSubscription} from "../controllers/subscription.controller.js"
+import authorize from "../middlewares/auth.middleware.js"
 
 const subRouter = Router();
 
-subRouter.get("/", (req, res) => res)
+//get all subscriptions
+subRouter.get("/", getAllSubscriptions)
 
-subRouter.get("/:id", (req, res) => res)
+// get a specific subscription
+subRouter.get("/:id", getSpecificSubscription)
 
-subRouter.post("/", (req, res) => res)
+//create subscription 
+subRouter.post("/",authorize ,createSubscription);
+
+//extract all the subs of a specific user
+subRouter.get("/user/:id", authorize, getUserSubscription);
 
 subRouter.put("/:id", (req, res) => res)
 
 subRouter.delete("/:id", (req, res) => res)
 
-//extract all the subs of a specific user
-subRouter.put("/user/:id", (req, res) => res)
 
 subRouter.get("/upcoming-renewals", (req, res) => res);
 
