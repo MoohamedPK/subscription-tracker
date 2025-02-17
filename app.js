@@ -7,6 +7,7 @@ import connectDb from "./database/db.js"
 import errorMiddleware from "./middlewares/errorMiddleware.js"
 import cookieParser from "cookie-parser";
 import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
+import workflowRouter from "./routes/workflow.router.js";
 
 
 const app = express();
@@ -14,17 +15,18 @@ const app = express();
 // middleware that allow you to handle json data sent in req
 app.use(express.json());
 
-app.use(express.urlencoded({extended: false }))
+app.use(express.urlencoded({extended: false }));
 
 // this one is allow you to store user data
 app.use(cookieParser())
 
 //ARCJET middleware 
-app.use(arcjetMiddleware)
+app.use(arcjetMiddleware);
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/subscriptions", subRouter);
+app.use("/api/v1/workflows", workflowRouter);
 
 app.use(errorMiddleware);
 

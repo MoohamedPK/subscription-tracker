@@ -17,7 +17,7 @@ const authorize = async (req, res, next) => {
 
         // if there is a token then we decoded
         const decoded = jwt.verify(token, JWT_SECRET);
-        console.log(decoded)
+        
         // based on the decoded token, we check if the user exist on DB
         const user = await User.findById(decoded.userId);
 
